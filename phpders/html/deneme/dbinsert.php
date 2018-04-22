@@ -11,9 +11,9 @@ echo "SOKAK : ". $sokak ."<br>";
 echo "Teşekkürler..";
 
 class MyDB extends SQLite3 {
-      function __construct() {
-         $this->open('haritacihazveritabani.db');
-      }
+         function __construct() {
+            $this->open('haritacihazveritabani.db');
+         }
    }
    $db = new MyDB();
    if(!$db) {
@@ -21,14 +21,14 @@ class MyDB extends SQLite3 {
    } else {
       echo "Opened database successfully\n";
    }
-   
+
    $sql =<<<EOF
 
-      INSERT INTO CIHAZ_VERITABANI (ID,IL NOT NULL,ILCE,SOKAK)
-      VALUES ( '$rand_id', '$il', '$ilce', '$sokak' );
+   INSERT INTO CIHAZ_VERITABANI (ID,IL,ILCE,SOKAK)
+   VALUES ( '$rand_id', '$il', '$ilce', '$sokak' );
 
 EOF;
-   
+
 
    $ret = $db->exec($sql);
    if(!$ret) {
@@ -36,8 +36,8 @@ EOF;
    } else {
       echo "Records created successfully\n";
    }   
-   
-   
+
+
    $db->close();   
 
 ?>

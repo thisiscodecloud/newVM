@@ -4,6 +4,8 @@
    $ilce = strtoupper($_POST["cihazbul_ilce"]);
    $sokak = strtoupper($_POST["cihazbul_sokak"]);
 
+<a href="index.php"></a>
+
 echo "IL : ". ($il) ."<br>";
 echo "ILCE : ". ($ilce) ."<br>";
 echo "SOKAK : ". ($sokak) ."<br>";
@@ -34,4 +36,6 @@ EOF;
    }
    echo "Operation done successfully"."<br>";
    $db->close();
+
+
 ?>
