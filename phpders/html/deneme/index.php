@@ -2,48 +2,6 @@
 
 
 
-<?php
-   
-   $il = strtoupper($_POST["cihazbul_il"]);
-   $ilce = strtoupper($_POST["cihazbul_ilce"]);
-   $sokak = strtoupper($_POST["cihazbul_sokak"]);
-$lastData = NULL;
-if( $il || $ilce || $sokak ) {
-echo "IL : ". ($il) ."<br>";
-echo "ILCE : ". ($ilce) ."<br>";
-echo "SOKAK : ". ($sokak) ."<br>";
-
-  class MyDB extends SQLite3 {
-      function __construct() {
-         $this->open('haritacihazveritabani.db');
-      }
-   }
-   
-   $db = new MyDB();
-   if(!$db) {
-      echo $db->lastErrorMsg();
-   } else {
-      echo "Opened database successfully <br><br>";
-   }
-
-$sql =<<<EOF
-   SELECT * from CIHAZ_VERITABANI where IL='$il' OR ILCE='$ilce' OR SOKAK='$sokak';
-EOF;
-    $index = 0;
-   $ret = $db->query($sql);
-   while($row = $ret->fetchArray(SQLITE3_ASSOC) ) {
-      echo "ID = ". $row['ID'] . "<br>";
-      echo "IL = ". $row['IL'] ."<br>";
-      echo "ILCE = ". $row['ILCE'] ."<br>";
-      echo "SOKAK = ".$row['SOKAK'] ."<br><br>";
-      $lastData[$index] = $row;
-      $index = $index + 1;
-   }
-   echo "Operation done successfully"."<br>";
-   $db->close();
-}
-
-?>
 
 
 <html class=" desktop" lang="tr">
@@ -190,7 +148,7 @@ EOF;
                 <form action="index.php" method=post>
                     <div style="display: block; width: 240px; height: 14px; margin: 5px;">
                         <div style="float: left; margin:0; padding: 5px">
-                            <p class="CihazBulContentName">İl : <?php if( $lastData ) echo $lastData[($index)-2]['ID']; ?> </p>
+                            <p class="CihazBulContentName">İl :</p>
                         </div>
 
                         <div style="float: right; margin:0; ">
@@ -293,7 +251,14 @@ EOF;
 
     </div>
 
+	<div>
+		<?php
+		include 'dbquery.php';
+		if( $lastData ) echo $lastData[($index)-2]['ID']; 
+		?>		
+	</div>
 
+                            	
 
 
     <!-- GoogleMaps Starts -->
